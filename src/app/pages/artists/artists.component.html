@@ -1,0 +1,63 @@
+<h1>Artistas</h1>
+<hr>
+
+<div class="row">
+    <div class="col text-left">
+            <button class="btn btn-success" [routerLink]="['/artist/new']" > 
+                <i class="fa fa-plus"></i>
+                Nuevo
+            </button>
+
+    </div>
+</div>
+
+<table *ngIf="!cargando && artists.length > 0" class="table mt-4 animated animated fadeIn slow">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Habilidad</th>
+        <th scope="col">Status</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of artists; let i = index">
+        <td scope="row">{{ i+1 }}</td>
+        <td>{{ item.nombre }}</td>
+        <td>{{ item.habilidad }}</td>
+        <td>
+            <label *ngIf="item.status" class="badge badge-success">Vivo</label>
+            <label *ngIf="!item.status" class="badge badge-danger">Muerto</label>
+        </td>
+        <td>
+            <button class="btn btn-info mr-1"
+                [routerLink]="['/artist', item.id ]" >
+                <i class="fa fa-pen"></i>
+            </button>
+            <button class="btn btn-danger mr-1"
+                    (click)="deleteArtist(item , i )">
+                <i class="fa fa-trash"></i>
+            </button>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+  
+
+  <div *ngIf="cargando" class="alert alert-info text-center mt-2 animated fadeIn faster">
+        <h3 class="alert-heading">Cargando</h3>
+        <p>
+            <i class="fa fa-sync-alt fa-spin fa-2x"></i>
+        </p>
+        <p class="mb-0"></p>
+  </div>
+
+<div *ngIf="!cargando && artists.length ===0" class="alert alert-danger text-center mt-2 ">
+    <h3 class="alert-heading">No hay registros</h3>
+    <p>
+        <i class="fa fa-exclamation-triangle fa-2x"></i>
+    </p>
+    <p class="mb-0"></p>
+</div>

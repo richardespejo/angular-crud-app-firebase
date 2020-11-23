@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "CRUDFirebase"
+    }
+  },
+  "defaultProject": "CRUDFirebase",
+  "cli": {
+    "analytics": false
+  }
 }
